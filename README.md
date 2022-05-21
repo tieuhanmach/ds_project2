@@ -61,19 +61,19 @@ This project use built-in libraries for data cleaning ,text processing and data 
 `nltk.download('averaged_perceptron_tagger')`
 ## **Table of content**
 1. app
-| - template
-| |- master.html  # main page of web app
-| |- go.html  # classification result page of web app
-|- run.py  # Flask file that runs app
+- template
+    - master.html  # main page of web app
+    - go.html  # classification result page of web app
+- run.py  # Flask file that runs app
 
 2. data
-|- disaster_categories.csv  # data to process 
-|- disaster_messages.csv  # data to process
-|- process_data.py
-|- DisasterResponse.db   # database to save clean data to
+- disaster_categories.csv  # data to process 
+- disaster_messages.csv  # data to process
+- process_data.py
+- DisasterResponse.db   # database to save clean data to
 
 3. models
-|- train_classifier.py
-|- classifier.pkl  # saved model 
+- train_classifier.py
+- classifier.pkl  # saved model 
 
 ## **License**
