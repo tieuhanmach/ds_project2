@@ -8,6 +8,7 @@ from nltk import pos_tag
 from sqlalchemy import create_engine
 import pandas as pd
 import numpy as np
+import pickle
 
 from sklearn.pipeline import Pipeline,FeatureUnion
 from sklearn.metrics import confusion_matrix, classification_report
@@ -75,9 +76,8 @@ def build_model():
     )
 
     # specify parameters for grid search
-    parameters = {'vect__ngram_range': ((1, 1), (1, 2)),
-             'clf__estimator__n_estimators': [50, 100, 200],
-             'clf__estimator__min_samples_split':[2, 3, 4]}
+    parameters = {
+             'clf__estimator__n_estimators': [50, 100]}
 
     # create grid search object
     cv = GridSearchCV(pipeline,param_grid=parameters)
@@ -97,7 +97,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
     classification_report with f1 score, precision and recall for each output category
     """
     result_report={}
-    for ind,cat in enumerate(categories_name):
+    for ind,cat in enumerate(category_names):
         y_test_cat = Y_test[ind]
         y_pred = model.predict(X_test)
         y_pred_cat=y_pred[ind]
