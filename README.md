@@ -1,7 +1,7 @@
 # Disaster Response Pipeline Project
 ## **Motivation**
-This project use data set containing real messages that were sent during disaster events and build machine learning pipeline to categorize these events in order to send the messages to an appropriate disaster relief agency.
-This project include a web app where an emergency worker can input a new message and get classification results in several categories. The web app will also display visualizations of the data.
+This project utilize data set containing genuine messages that were sent during disaster events and build machine learning pipeline to classify these occasions in order to send the messages to an suitable disaster help office. It includes a web app that applies the algorithm to an emergency worker's message as they receive it and show classification results in particular categories. The web app will also display visualizations of the information.
+
 ## **Instructions** :
 1. Run the following commands in the project's root directory to set up database and model.
 
