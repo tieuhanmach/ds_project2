@@ -75,5 +75,3 @@ This project use built-in libraries for data cleaning ,text processing and data 
 3. models
 - train_classifier.py
 - classifier.pkl  # saved model 
-
-## **License**
