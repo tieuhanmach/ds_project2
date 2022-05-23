@@ -39,12 +39,12 @@ model = joblib.load("../models/classifier.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
+    # data for first visual
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
-    
+    # data for second and third visual
+    cat_count=df[df.columns[4:]].sum().sort_values(ascending=False)
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
@@ -63,46 +63,47 @@ def index():
                     'title': "Genre"
                 }
             }
+        },
+        {
+            'data': [
+                Bar(
+                    x=cat_count.head(10).index.tolist(),
+                    y=cat_count.head(10).values.tolist()
+                )
+            ],
+
+            'layout': {
+                'title': 'Top 10 most common categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Categories"
+                }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=cat_count.tail(10).index.tolist(),
+                    y=cat_count.tail(10).values.tolist()
+                )
+            ],
+
+            'layout': {
+                'title': 'Top 10 least common categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Categories"
+                }
+            }
         }
     ]
+
     
-    # second chart plots top 10 most common categories   
-    graph_two = []
-    df = df
-    cat_count=df[df.columns[4:]].sum().sort_values(ascending=False).head(10)
-
-    graph_two.append(
-      go.Bar(
-      x = cat_count.index.tolist(),
-      y = cat_count.values.tolist(),
-      )
-    )
-
-    layout_two = dict(title = 'Top 10 most common categories',
-                xaxis = dict(title = 'Categories',),
-                yaxis = dict(title = 'Count'),
-                )
-
-
-# third chart plots percent of population that is rural from 1990 to 2015
-    graph_three = []
-    df = df
-    cat_count=df[df.columns[4:]].sum().sort_values(ascending=False).head(10)
-
-    graph_three.append(
-      go.Bar(
-      x = cat_count.index.tolist(),
-      y = list(cat_count.values/df.shape[0]),
-      )
-    )
-
-    layout_three = dict(title = 'Top 10 most common categories',
-                xaxis = dict(title = 'Categories',),
-                yaxis = dict(title = 'Percentage'),
-                )
     
-    graphs.append(dict(data=graph_two, layout=layout_two))
-    graphs.append(dict(data=graph_three, layout=layout_three))
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
